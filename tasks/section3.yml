@@ -437,7 +437,7 @@
   when:
       - rhel7cis_firewall == "firewalld"
       - rhel7cis_rule_3_6_2|bool
-      - ansible_connection != 'docker'
+      - ansible_connection not in ['docker', 'podman']
   tags:
       - level1
       - patch
@@ -491,7 +491,7 @@
   when:
       - rhel7cis_firewall == "firewalld"
       - rhel7cis_rule_3_6_5|bool
-      - ansible_connection != 'docker'
+      - ansible_connection not in ['docker', 'podman']
   tags:
       - level1
       - patch

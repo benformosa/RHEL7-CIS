@@ -9,7 +9,7 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: CIS-centos7
+  - name: cis-centos7
     image: milcom/centos7-systemd
     privileged: true
 provisioner:
