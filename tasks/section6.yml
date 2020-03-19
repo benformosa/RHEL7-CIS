@@ -312,7 +312,7 @@
   file:
       state: absent
       dest: "~{{ item }}/.forward"
-  with_items: "{{ users.stdout_lines }}"
+  with_items: "{{ users }}"
   when:
       - rhel7cis_rule_6_2_11|bool
   tags:
@@ -325,7 +325,7 @@
   file:
       state: absent
       dest: "~{{ item }}/.netrc"
-  with_items: "{{ users.stdout_lines }}"
+  with_items: "{{ users }}"
   when:
       - rhel7cis_rule_6_2_12|bool
   tags:
@@ -337,7 +337,7 @@
 - name: "SCORED | 6.2.13 | PATCH | Ensure users' .netrc Files are not group or world accessible"
   stat:
       path: "~{{ item }}/.netrc"
-  with_items: "{{ users.stdout_lines }}"
+  with_items: "{{ users }}"
   register: netrc_files
   tags:
       - level1
@@ -363,7 +363,7 @@
   file:
       state: absent
       dest: "~{{ item }}/.rhosts"
-  with_items: "{{ users.stdout_lines }}"
+  with_items: "{{ users }}"
   when:
       - rhel7cis_rule_6_2_14|bool
   tags:
