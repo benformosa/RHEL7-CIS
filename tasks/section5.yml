@@ -420,14 +420,10 @@
 - name: "SCORED | 5.3.1 | PATCH | Ensure password creation requirements are configured"
   ini_file:
       state: present
-      path: /etc/security/pwquality.conf
-      owner: root
-      group: root
-      mode: '0644'
-      section: null
-      option: "{{ item.key }}"
-      value: "{{ item.value }}"
-  loop: "{{ rhel7cis_pwquality | dict2items }}"
+      dest: /etc/security/pwquality.conf
+      regexp: '^{{ item.key }}'
+      line: '{{ item.key }} = {{ item.value }}'
+  with_dict: "{{ rhel7cis_pwquality }}"
   when:
       - rhel7cis_rule_5_3_1|bool
   tags:
@@ -529,7 +525,11 @@
 - name: "SCORED | 5.4.2 | PATCH | Ensure system accounts are non-login"
   shell: "awk -F: '($3 < {{ rhel7cis_rule_5_4_2_min_uid }}) {print $1 }' /etc/passwd"
   changed_when: no
+<<<<<<< HEAD
   check_mode: false
+=======
+  check_mode: no
+>>>>>>> pwquality
   register: system_account
   when:
       - rhel7cis_rule_5_4_2|bool
