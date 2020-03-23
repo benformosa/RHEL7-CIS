@@ -418,7 +418,7 @@
       - rule_5.2.16
 
 - name: "SCORED | 5.3.1 | PATCH | Ensure password creation requirements are configured"
-  ini_file:
+  lineinfile:
       state: present
       dest: /etc/security/pwquality.conf
       regexp: '^{{ item.key }}'
